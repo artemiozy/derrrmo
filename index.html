@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abro Site</title>
+    <link rel="icon" href="static/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="static/styles.css">
+
+    <style>
+        /* Стили для всплывающего окна */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .popup button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #555;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #777;
+        }
+
+        /* Стиль уведомления об успешной отправке */
+        #successMessage {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Уведомление об успешной отправке отзыва -->
+    <div id="successMessage">Отзыв отправлен</div>
+
+    <div class="container">
+        <!-- Заголовок с профилем -->
+        <div class="header">
+            <div class="profile-wrapper">
+                <img src="static/krug.png" alt="Круглый фон" class="background-circle">
+                <img src="static/profile.png" alt="Фото профиля" class="profile-pic">
+            </div>
+            <div class="header-text">
+                <h1 class="welcome-message title-main">Приветствую тебя, дорогой друг!</h1>
+                <p class="intro-text">Я — Артём Абрамовский.</p>
+                <p class="intro-text">Полагаю, тебе интересно узнать обо мне.</p>
+            </div>
+        </div>
+
+        <!-- Блок с криптотрейдингом -->
+        <div class="section trader-section">
+            <div class="trader-images">
+                <img src="static/bitoc.png" alt="Биткойн" class="trader-icon">
+                <img src="static/wallet.png" alt="Кошелек" class="trader-icon">
+            </div>
+            <div class="trader-text">
+                <h2 class="title-crypto">Я — криптоаналитик</h2>
+                <p class="align-left">Меня зовут Артём, и я нахожусь в криптоиндустрии уже 8 лет. Я специализируюсь на анализе рынка и создании сигналов.</p>
+                <p class="align-left">Мой курс купили более 450 людей, которые уже убедились в том, что это лучшее вложение в их жизни. Это не скам, честно. Покупайте мои курсы.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="title-student">Я — студент колледжа криптотрейдинга</h2>
+            <ul class="align-left">
+                <li>Заканчиваю 4-ый курс криптотрейдинга</li>
+                <li></li>
+                <li>Принимал участие в нескольких криптотрейдерских мероприятиях</li>
+                <li></li>
+                <li>За время обучения разработал много колоссальных проектов</li>
+               <li></li>
+                <li>Являюсь заместителем старосты в своей группе</li>
+            </ul>
+        </div>
+
+        <!-- Футер -->
+        <div class="footer">
+            <h2 class="title-footer">Всё это — Я</h2>
+            <button onclick="openPopup()">Связь со мной</button>
+        </div>
+    </div>
+
+    <!-- Всплывающее окно -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup">
+            <h2>Свяжитесь со мной</h2>
+            <p>Мой телеграм - @artabro</p>
+            <p>Мой mail - temaabramov529@mail.ru</p>
+
+            <!-- Форма для отправки отзыва -->
+            <form method="POST" accept-charset="UTF-8" onsubmit="showSuccessMessage(event)">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <label for="review">Отзыв:</label>
+                <textarea id="review" name="review" required></textarea><br><br>
+
+                <button type="submit">Отправить отзыв</button>
+            </form>
+
+            <button onclick="closePopup()">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Скрипт для управления всплывающим окном и уведомления -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  <!-- Подключаем jQuery -->
+
+    <script>
+        function openPopup() {
+            document.getElementById("popupOverlay").style.display = "flex";
+        }
+
+        function closePopup() {
+            document.getElementById("popupOverlay").style.display = "none";
+        }
+
+        function showSuccessMessage(event) {
+            event.preventDefault(); // Предотвращаем стандартное поведение формы
+
+            var email = document.getElementById("email").value;
+            var review = document.getElementById("review").value;
+
+            // Отправляем данные с помощью AJAX
+            $.ajax({
+                url: "/",  // Отправляем на главный путь
+                method: "POST",
+                data: {
+                    email: email,
+                    review: review
+                },
+                success: function(response) {
+                    // Показываем уведомление об успешной отправке
+                    const successMessage = document.getElementById("successMessage");
+                    successMessage.style.display = "block";
+
+                    // Скрываем уведомление через 3 секунды
+                    setTimeout(() => {
+                        successMessage.style.display = "none";
+                    }, 3000);
+
+                    // Закрыть всплывающее окно
+                    closePopup();
+                },
+                error: function() {
+                    alert("Произошла ошибка при отправке отзыва");
+                }
+            });
+        }
+    </script>
+</body>
+</html>

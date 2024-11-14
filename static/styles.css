@@ -1,0 +1,205 @@
+@font-face {
+    font-family: 'Arial';
+    src: url("/static/fonts/Izuver.otf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Глобальные стили */
+body {
+    font-family: 'Izuver', Arial, sans-serif;
+    background-image: url("/static/gigo.png");
+    font-size: 12px;
+    background-size: cover; /* Автоматическое масштабирование фона */
+    background-position: center; /* Центрирование фона */
+    background-repeat: no-repeat;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-attachment: scroll; /* Отключение фиксированного фона */
+}
+
+/* Настройка контейнера */
+.container {
+    width: 100%;
+    max-width: 700px;
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Классы для заголовков */
+.title-main, .title-crypto, .title-student, .title-footer {
+    font-size: 1.5rem;
+    text-align: center;
+    color: #ffa500;
+}
+
+/* Для текста в блоках секции */
+.section p, .section li {
+    font-size: 0.9rem;
+}
+
+/* Приветствие */
+.welcome-message {
+    font-size: 1.5rem;
+    color: #ffa500;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+/* Секция с текстом про меня */
+.intro-text {
+    font-size: 1rem;
+    color: #fff;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Стили для текста, выровненного по левому краю */
+.align-left {
+    text-align: left;
+    color: #fff;
+}
+
+/* Стили для секции криптотрейдера */
+.trader-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.trader-images {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.trader-icon {
+    width: 50px;
+    height: 50px;
+    margin: 10px 0 0 0;
+}
+
+/* Блоки */
+.header, .section, .footer {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(68, 68, 68, 0.8);
+    border-radius: 20px;
+    border: 1px solid #ffffff;
+}
+
+/* Структура блока с профилем */
+.profile-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.background-circle {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    background-image: url("/static/krug.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    height: 120px;
+}
+
+.profile-pic {
+    width: 130px;
+    height: 120px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Кнопка */
+button {
+    font-family: 'Sclate', Arial, sans-serif;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffa500;
+    background-color: #555;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #777;
+}
+
+/* Дополнительные стили для текстового поля отзыва */
+.popup textarea {
+    width: 80%;
+    padding: 8px;
+    border-radius: 4px;
+    resize: none;
+    font-size: 12px;
+    height: 100px;
+}
+
+/* Мобильные стили */
+@media (max-width: 600px) {
+    body {
+        font-size: 16px;
+        padding: 10px;
+        align-items: center;
+        background-size: cover;
+        background-position: right center; /* Изменяем позицию фона на мобильных устройствах */
+    }
+
+    .container {
+        width: 100%;
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        min-height: 100px;
+        margin-top: 20px;
+    }
+
+    .profile-wrapper {
+        width: 80px;
+        height: 80px;
+        margin-top: 10px;
+    }
+
+    .background-circle {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile-pic {
+        width: 70px;
+        height: 70px;
+    }
+}
